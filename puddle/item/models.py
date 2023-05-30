@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
@@ -9,3 +10,16 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Item(models.Model):
+    Category = models.ForeignKey(Category, related_name='items', on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True)
+    abv = models.CharField(max_length=10, blank=True, null=True)
+    ibu = models.CharField(max_length=10, blank=True, null=True)
+    image = models.ImageField(upload_to='item_images', blank=True, null=True)
+    quantity = models.IntegerField(default=0)
+    created_by = models.ForeignKey(User, related_name='items', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
