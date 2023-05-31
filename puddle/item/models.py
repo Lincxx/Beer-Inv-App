@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Category(models.Model):
     name = models.CharField(max_length=255)
 
@@ -13,7 +14,8 @@ class Category(models.Model):
 
 
 class Item(models.Model):
-    Category = models.ForeignKey(Category, related_name='items', on_delete=models.CASCADE)
+    category = models.ForeignKey(
+        Category, related_name='items', on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     brewery = models.CharField(max_length=255, blank=True, null=True)
     city = models.CharField(max_length=255, blank=True, null=True)
@@ -23,7 +25,8 @@ class Item(models.Model):
     ibu = models.CharField(max_length=10, blank=True, null=True)
     image = models.ImageField(upload_to='item_images', blank=True, null=True)
     quantity = models.IntegerField(default=0)
-    created_by = models.ForeignKey(User, related_name='items', on_delete=models.CASCADE)
+    created_by = models.ForeignKey(
+        User, related_name='items', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
 

@@ -7,14 +7,14 @@
   <div class="grid grid-cols-3 gap-3">
     {% for item in items %}
       <div>
-        <a href="">
+        <a href="{% url 'item:detail' item.id %}">
           <div>
             <img src="{{ item.image.url }}" 
                  class="rounded-t-xl h-64"
                  alt="" 
                  srcset=""
             >
-            <div class="py-6 bg-white rounded-b-xl">
+            <div class="py-6 bg-white rounded-t-xl">
               <h2 class="text-2xl">
                 {{ item.name }}
               </h2>
@@ -35,7 +35,7 @@
               {% if category.items.count > 0 %}
                 <div>
                     <a href="#">
-                        <div class="p-6 bg-white rounded-b-xl">
+                        <div class="p-6 bg-white rounded-t-xl">
                             <h2 class="text-2xl">{{ category.name }}</h2>
                             <p class="text-gray-500">{{ category.items.count }} items</p>
                         </div>
