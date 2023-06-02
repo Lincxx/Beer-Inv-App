@@ -1,4 +1,7 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render
+
+from .forms import NewItemForm
 
 from .models import Item, Category
 
@@ -12,3 +15,14 @@ def detail(request, pk):
         'item': item,
         'related_items': related_items
     })
+
+
+@login_required
+def new(request):
+    form = NewItemForm()
+
+    return render(request, 'item/form.html', {
+        'form': form,
+        'title': 'New Item',
+    })
+# going to do styling in here just to show an example that we can.
