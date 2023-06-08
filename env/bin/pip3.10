@@ -1,4 +1,4 @@
-#!/home/lincxx/Documents/Fullstack/Puddle/env/bin/python3
+#!/home/lincxx/Documents/Fullstack/beer_inventory_app/env/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys

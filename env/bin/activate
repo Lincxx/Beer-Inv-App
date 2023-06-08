@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/lincxx/Documents/Fullstack/Puddle/env"
+VIRTUAL_ENV="/home/lincxx/Documents/Fullstack/beer_inventory_app/env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
