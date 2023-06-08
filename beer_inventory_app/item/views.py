@@ -1,9 +1,29 @@
 from django.contrib.auth.decorators import login_required
+# allows us to search in mulitple fields
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import EditItemForm, NewItemForm
 
 from .models import Item, Category
+
+
+def browse(request):
+    query = request.GET.get('query', '')
+    category_id = request.GET.get('category', 0)
+    categories = Category.objects.all()
+    items = Item.objects.all()
+
+    if query:
+        items = items.filter(Q(name__icontains=query) |
+                             Q(brewery__icontains=query))
+
+    return render(request, 'item/browse.html', {
+        'items': items,
+        'query': query,
+        'category_id': int(category_id),
+        'categories': categories,
+    })
 
 
 def detail(request, pk):

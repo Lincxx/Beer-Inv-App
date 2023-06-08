@@ -1,0 +1,48 @@
+{% extends 'core/base.html' %}
+
+{% block title %} Beers {% endblock %}
+
+{% block content %}
+
+<div class="pb-6 grid grid-cols-4 gap-4 bg-gray-100">
+   <div class="col-span-1">
+        <form action="{% url 'item:browse' %}" method="get">
+            <input type="text" name="query" class="w-full py-4 px-6 border rounded-xl " value="{{query}}" placeholder="Find a beer or a style...">
+
+            <button class="mt-2 py-4 px-8 text-lg bg-teal-500 text-white rounded-xl">Search</button>
+        </form>
+        <hr class="my-6">
+        <p class="font-semibold">Categories</p>
+
+        <ul>
+            {% for item in items  %}
+                 <li class="py-2 px-2 rounded-xl">
+                            <a href="{% url 'item:browse' %}?query{{ query }}&category={{ category_id }}">
+                                {{ item.category }}
+                            </a>
+                    </li> 
+            {% endfor %}
+        </ul>
+   </div> 
+   <div class="col-span-2 place-content-center">
+        {% for item in items %}
+        
+            <div class="grid grid-cols-3 mb-3 bg-teal-200 rounded-xl">
+                <div class="  rounded-xl  ">
+                    <img src="{{ item.image.url }}" alt="" srcset="" class="rounded-xl block my-auto  h-48">
+                </div>
+
+                <div class="p-6 grid-span-2 rounded-xl">
+                    <h1 class="mb-6 text-3xl">{{ item.name }}</h1>
+                    
+                    <hr class="my-2 h-0.5 border-t-0 bg-gray-400 opacity-100 dark:opacity-50" />
+                    <p class="text-gray-500"><strong>ABV: </strong>{{ item.abv}}</p>
+                    <p class="text-gray-500"><strong>IBU: </strong>{{ item.ibu}}</p>     
+                </div>
+            </div>
+
+        {% endfor %}
+   </div> 
+</div>
+
+{% endblock %}
